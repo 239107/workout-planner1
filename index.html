@@ -103,6 +103,56 @@
         <h3>📅 Workout Calendar</h3>
         <div id="calendar"></div>
       </div>
+      <div id="pointDisplay" style="margin-top: 20px; font-weight: bold;">Points: 0</div>
+
+      <!-- BMI Calculator (the working one) -->
+      <div id="bmiCalculator" style="margin-top: 30px;">
+        <h3>📏 BMI Calculator</h3>
+        <input type="number" id="weightInput" placeholder="Weight (kg)">
+        <input type="number" id="heightInput" placeholder="Height (cm)">
+        <button onclick="calculateBMI()">Calculate BMI</button>
+        <p id="bmiResult"></p>
+      </div>
+    
+      <!-- Water Tracker -->
+      <div id="waterTracker" style="margin-top: 30px;">
+        <h3>💧 Water Tracker</h3>
+        <input type="number" min="0" max="20" value="0" onchange="updateWaterLevel(this.value)">
+        <p>Water Intake: <span id="waterValue">0 cups</span></p>
+      </div>
+    
+      <!-- Sleep Tracker -->
+      <div id="sleepTracker" style="margin-top: 30px;">
+        <h3>😴 Sleep Tracker</h3>
+        <input type="number" id="sleepInput" min="0" max="12" value="0" onchange="updateSleepEmoji(this.value)">
+        <p>Sleep Quality: <span id="sleepEmoji">😴</span></p>
+      </div>
+    
+      <!-- Meal Tracker -->
+      <div id="mealTracker" style="margin-top: 30px;">
+        <h3>🍽️ Meal Tracker</h3>
+        <input type="number" min="0" max="5" value="0" onchange="updateMealEmoji(this.value)">
+        <p>Meal Health: <span id="mealEmoji">🍽️</span></p>
+      </div>
+    
+      <!-- Notes Section -->
+      <div id="noteSection" style="margin-top: 30px;">
+        <h3>📝 Daily Notes</h3>
+        <textarea id="dailyNote" rows="4" cols="50" placeholder="Write your daily note..."></textarea><br>
+        <button id="saveNote">Save Note</button>
+      </div>
+    
+      <!-- Buddy System -->
+      <div id="buddySystem" style="margin-top: 30px;">
+        <h3>👯‍♂️ Buddy System</h3>
+        <input type="text" id="buddyMessage" placeholder="Send a message to your workout buddy">
+        <button onclick="sendBuddyMessage()">Send Message</button>
+      </div>
+    
+      <!-- Streak Counter -->
+      <div id="streakSection" style="margin-top: 30px;">
+        <h3 id="streakCounter">🔥 Streak: 0</h3>
+      </div>
     </div>
 
     <!-- Sign Up / Log In Forms -->
