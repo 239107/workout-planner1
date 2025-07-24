@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Workout Planner</title>
-  <link rel="stylesheet" href="index.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css">
+  <link rel="stylesheet" href="index.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" />
 </head>
 <body>
   <div class="container">
@@ -35,8 +35,9 @@
     <!-- Wellness Tracker -->
     <div id="wellnessSection" style="display: none;">
       <h3>💧 Water & Sleep Tracker</h3>
-      <label>Water (glasses): <input type="number" id="waterIntake" min="0" max="12"></label>
-      <label>Sleep (hours): <input type="number" id="sleepHours" min="0" max="12"></label>
+      <label>Water (glasses): <input type="number" id="waterIntake" min="0" max="20" value="0" onchange="updateWaterLevel(this.value)"></label>
+      <label>Sleep (hours): <input type="number" id="sleepHours" min="0" max="12" value="0" onchange="updateSleepEmoji(this.value)"></label>
+      <p>Sleep Quality: <span id="sleepEmoji">😴</span></p>
       <button onclick="saveWellness()">Save</button>
     </div>
 
@@ -51,11 +52,11 @@
       <p>Welcome, <span id="userEmail"></span>! (<a href="#" onclick="logOut()">Log Out</a>)</p>
 
       <!-- Dark Mode Toggle -->
-      <label><input type="checkbox" id="darkModeToggle"> 🌙 Dark Mode</label>
+      <label><input type="checkbox" id="darkModeToggle" /> 🌙 Dark Mode</label>
 
       <!-- Workout Buddy -->
       <div id="buddySection">
-        <input type="text" id="buddyName" placeholder="Workout Buddy Name">
+        <input type="text" id="buddyName" placeholder="Workout Buddy Name" />
         <button onclick="saveBuddy()">Save Buddy</button>
         <p id="buddyDisplay"></p>
       </div>
@@ -63,16 +64,16 @@
       <!-- BMI Calculator -->
       <div id="bmiSection">
         <h3>📏 BMI Calculator</h3>
-        <input type="number" id="height" placeholder="Height (inches)">
-        <input type="number" id="weight" placeholder="Weight (lbs)">
+        <input type="number" id="height" placeholder="Height (inches)" />
+        <input type="number" id="weight" placeholder="Weight (lbs)" />
         <button onclick="calculateBMI()">Calculate BMI</button>
         <p id="bmiResult"></p>
       </div>
 
       <!-- Age Group Selection -->
       <div id="ageSection">
-        <label><input type="radio" name="ageGroup" value="kids"> Kids</label>
-        <label><input type="radio" name="ageGroup" value="adult"> Adult</label>
+        <label><input type="radio" name="ageGroup" value="kids" /> Kids</label>
+        <label><input type="radio" name="ageGroup" value="adult" /> Adult</label>
       </div>
 
       <!-- Fitness Goal Form -->
@@ -103,19 +104,48 @@
         <h3>📅 Workout Calendar</h3>
         <div id="calendar"></div>
       </div>
+
+      <!-- Gamification Points Display -->
+      <div id="pointDisplay" style="margin-top: 20px; font-weight: bold;"></div>
+
+      <!-- Meal Tracker -->
+      <div id="mealTracker" style="margin-top: 30px;">
+        <h3>🍽️ Meal Tracker</h3>
+        <input type="number" id="mealInput" min="0" max="5" value="0" onchange="updateMealEmoji(this.value)" />
+        <p>Meal Health: <span id="mealEmoji">🍽️</span></p>
+      </div>
+
+      <!-- Buddy Message -->
+      <div id="buddySystem" style="margin-top: 30px;">
+        <h3>👯‍♂️ Buddy System</h3>
+        <input type="text" id="buddyMessage" placeholder="Send a message to your workout buddy" />
+        <button onclick="sendBuddyMessage()">Send Message</button>
+      </div>
+
+      <!-- Streak Counter -->
+      <div id="streakSection" style="margin-top: 30px;">
+        <h3 id="streakCounter">🔥 Streak: 0</h3>
+      </div>
+
+      <!-- Notes Section -->
+      <div id="noteSection" style="margin-top: 30px;">
+        <h3>📝 Daily Notes</h3>
+        <textarea id="dailyNote" rows="4" cols="50" placeholder="Write your daily note..."></textarea><br />
+        <button id="saveNoteBtn" onclick="saveNote()">Save Note</button>
+      </div>
     </div>
 
     <!-- Sign Up / Log In Forms -->
     <div id="forms" style="display:none;">
       <form id="signUpForm" style="display:none;">
-        <input type="email" id="suEmail" placeholder="Email" required>
-        <input type="tel" id="suPhone" placeholder="Phone">
-        <input type="password" id="suPass" placeholder="Password" required>
+        <input type="email" id="suEmail" placeholder="Email" required />
+        <input type="tel" id="suPhone" placeholder="Phone" />
+        <input type="password" id="suPass" placeholder="Password" required />
         <button type="button" onclick="signUp()">Submit</button>
       </form>
       <form id="logInForm" style="display:none;">
-        <input type="email" id="liEmail" placeholder="Email" required>
-        <input type="password" id="liPass" placeholder="Password" required>
+        <input type="email" id="liEmail" placeholder="Email" required />
+        <input type="password" id="liPass" placeholder="Password" required />
         <button type="button" onclick="logIn()">Log In</button>
       </form>
     </div>
@@ -125,78 +155,3 @@
   <script src="index.js"></script>
 </body>
 </html>
-<div id="bmiCalculator" style="margin-top: 30px;">
-  <h3>📏 BMI Calculator</h3>
-  <input type="number" id="weightInput" placeholder="Weight (kg)">
-  <input type="number" id="heightInput" placeholder="Height (cm)">
-  <button onclick="calculateBMI()">Calculate BMI</button>
-  <p id="bmiResult"></p>
-</div>
-<!-- Sleep Tracker -->
-<div id="sleepTracker" style="margin-top: 30px;">
-  <h3>😴 Sleep Tracker</h3>
-  <label for="sleepInput">Hours Slept:</label>
-  <input type="number" id="sleepInput" min="0" max="12" value="0" onchange="updateSleepEmoji(this.value)">
-  <p>Sleep Quality: <span id="sleepEmoji">😴</span></p>
-</div>
-<!-- HTML for Workout Planner Enhancements -->
-
-<!-- Dark Mode Toggle is already appended by JS -->
-
-<!-- Gamification Points Display -->
-<div id="pointDisplay" style="margin-top: 20px; font-weight: bold;"></div>
-
-<!-- BMI Calculator -->
-<div id="bmiCalculator" style="margin-top: 30px;">
-  <h3>📏 BMI Calculator</h3>
-  <input type="number" id="weightInput" placeholder="Weight (kg)">
-  <input type="number" id="heightInput" placeholder="Height (cm)">
-  <button onclick="calculateBMI()">Calculate BMI</button>
-  <p id="bmiResult"></p>
-</div>
-
-<!-- Water Tracker -->
-<div id="waterTracker" style="margin-top: 30px;">
-  <h3>💧 Water Tracker</h3>
-  <input type="number" min="0" max="20" value="0" onchange="updateWaterLevel(this.value)">
-  <p>Water Intake: <span id="waterValue">0 cups</span></p>
-</div>
-
-<!-- Sleep Tracker -->
-<div id="sleepTracker" style="margin-top: 30px;">
-  <h3>😴 Sleep Tracker</h3>
-  <label for="sleepInput">Hours Slept:</label>
-  <input type="number" id="sleepInput" min="0" max="12" value="0" onchange="updateSleepEmoji(this.value)">
-  <p>Sleep Quality: <span id="sleepEmoji">😴</span></p>
-</div>
-
-<!-- Meal Tracker -->
-<div id="mealTracker" style="margin-top: 30px;">
-  <h3>🍽️ Meal Tracker</h3>
-  <input type="number" min="0" max="5" value="0" onchange="updateMealEmoji(this.value)">
-  <p>Meal Health: <span id="mealEmoji">🍽️</span></p>
-</div>
-
-<!-- Notes Section -->
-<div id="noteSection" style="margin-top: 30px;">
-  <h3>📝 Daily Notes</h3>
-  <textarea id="dailyNote" rows="4" cols="50" placeholder="Write your daily note..."></textarea><br>
-  <button id="saveNote">Save Note</button>
-</div>
-
-<!-- Buddy Message -->
-<div id="buddySystem" style="margin-top: 30px;">
-  <h3>👯‍♂️ Buddy System</h3>
-  <input type="text" id="buddyMessage" placeholder="Send a message to your workout buddy">
-  <button onclick="sendBuddyMessage()">Send Message</button>
-</div>
-
-<!-- Streak Counter -->
-<div id="streakSection" style="margin-top: 30px;">
-  <h3 id="streakCounter">🔥 Streak: 0</h3>
-</div>
-
-<!-- Optional container wrapping -->
-<div class="container">
-  <!-- All above elements can be wrapped inside here if desired -->
-</div>
