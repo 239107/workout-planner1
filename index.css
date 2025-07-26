@@ -1,4 +1,3 @@
-/* ===== Base Styles ===== */
 body {
   background: linear-gradient(to right, #74ebd5, #acb6e5);
   font-family: 'Comic Sans MS', cursive, sans-serif;
@@ -6,7 +5,6 @@ body {
   padding: 0;
   color: #333;
   text-align: center;
-  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 body.dark-mode {
@@ -21,7 +19,6 @@ body.dark-mode {
   background: rgba(255, 255, 255, 0.95);
   border-radius: 15px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 body.dark-mode .container {
@@ -75,7 +72,6 @@ input, select {
   margin-left: auto;
   margin-right: auto;
   text-align: left;
-  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 body.dark-mode #workoutPlan {
@@ -97,8 +93,6 @@ ul {
   padding: 8px 12px;
   border-radius: 8px;
   border: none;
-  cursor: pointer;
-  transition: background 0.3s ease;
 }
 
 .diet-type button.active {
@@ -113,14 +107,13 @@ ul {
   margin: 20px 0;
   height: 20px;
   overflow: hidden;
-  transition: background-color 0.5s ease;
 }
 
 .progress {
   height: 100%;
   width: 0;
   background-color: #4caf50;
-  transition: width 1s ease-in-out, background-color 0.5s ease;
+  transition: width 1s ease-in-out;
 }
 
 #badgeReward {
@@ -130,7 +123,6 @@ ul {
   display: inline-block;
   border-radius: 10px;
   font-weight: bold;
-  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 #calendar {
@@ -139,7 +131,6 @@ ul {
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 body.dark-mode #calendar {
@@ -148,7 +139,7 @@ body.dark-mode #calendar {
   box-shadow: 0 0 10px rgba(255,255,255,0.1);
 }
 
-/* Additional sections with dark mode support */
+/* Additions */
 #bmiSection, #wellnessTrackers, #buddySection, #notesSection {
   margin: 30px auto;
   padding: 20px;
@@ -156,7 +147,6 @@ body.dark-mode #calendar {
   border-radius: 12px;
   max-width: 700px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 body.dark-mode #bmiSection,
@@ -179,7 +169,6 @@ body.dark-mode #notesSection {
   cursor: pointer;
   font-size: 14px;
   z-index: 999;
-  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 .water-level {
@@ -217,7 +206,6 @@ textarea {
   padding: 10px;
   max-width: 300px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 body.dark-mode #pointDisplay {

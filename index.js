@@ -1,4 +1,3 @@
-// Show/hide sign up and log in forms
 function showSignUp() {
   document.getElementById("forms").style.display = "block";
   document.getElementById("signUpForm").style.display = "block";
@@ -11,23 +10,18 @@ function showLogIn() {
   document.getElementById("signUpForm").style.display = "none";
 }
 
-// Sign up - store user in localStorage
 function signUp() {
   const email = document.getElementById("suEmail").value;
   const phone = document.getElementById("suPhone").value;
   const pass = document.getElementById("suPass").value;
 
-  if (!email || !pass) {
-    alert("Email and Password required");
-    return;
-  }
+  if (!email || !pass) return alert("Email and Password required");
 
   localStorage.setItem("user", JSON.stringify({ email, phone, pass }));
   alert("Sign up successful!");
   document.getElementById("forms").style.display = "none";
 }
 
-// Log in - check credentials from localStorage
 function logIn() {
   const email = document.getElementById("liEmail").value;
   const pass = document.getElementById("liPass").value;
@@ -44,7 +38,6 @@ function logIn() {
   document.getElementById("forms").style.display = "none";
 }
 
-// Log out
 function logOut() {
   document.getElementById("authSection").style.display = "block";
   document.getElementById("userSection").style.display = "none";
@@ -52,7 +45,7 @@ function logOut() {
   document.getElementById("workoutPlan").innerHTML = "";
 }
 
-// Workout plans
+// Workouts data
 const workouts = {
   beginner: {
     title: "💪 Beginner Plan (Fun & Easy)",
@@ -61,8 +54,8 @@ const workouts = {
       "5 Push-ups (on knees if needed)",
       "10 Bodyweight Squats",
       "20-Second Plank",
-      "10 Arm Circles",
-    ],
+      "10 Arm Circles"
+    ]
   },
   intermediate: {
     title: "💥 Intermediate Plan (Let’s Get Stronger!)",
@@ -71,8 +64,8 @@ const workouts = {
       "10 Regular Push-ups",
       "15 Squats",
       "30-Second Plank",
-      "15 Sit-ups",
-    ],
+      "15 Sit-ups"
+    ]
   },
   hard: {
     title: "🔥 Hard Plan (Muscle Builder!)",
@@ -81,9 +74,9 @@ const workouts = {
       "15 Push-ups",
       "20 Squats",
       "1-Minute Plank",
-      "20 Mountain Climbers",
-    ],
-  },
+      "20 Mountain Climbers"
+    ]
+  }
 };
 
 // Diet plans
@@ -94,15 +87,15 @@ const diets = {
       "🥪 Snack: Peanut butter sandwich + banana",
       "🍛 Lunch: Lentils (dal), brown rice, mixed veggies, tofu",
       "🥛 Snack: Greek yogurt + almonds",
-      "🍽️ Dinner: Quinoa with chickpeas and steamed spinach",
+      "🍽️ Dinner: Quinoa with chickpeas and steamed spinach"
     ],
     nonveg: [
       "🥣 Breakfast: Scrambled eggs (3) + toast + milk",
       "🥪 Snack: Chicken sandwich + apple",
       "🍛 Lunch: Grilled chicken, rice, steamed broccoli",
       "🥛 Snack: Boiled egg + yogurt",
-      "🍽️ Dinner: Fish curry with roti and salad",
-    ],
+      "🍽️ Dinner: Fish curry with roti and salad"
+    ]
   },
   intermediate: {
     veg: [
@@ -110,15 +103,15 @@ const diets = {
       "🥪 Snack: Cottage cheese (paneer) wrap + nuts",
       "🍛 Lunch: Rajma with brown rice, salad, tofu",
       "🥛 Snack: Boiled corn + curd",
-      "🍽️ Dinner: Lentil soup + roti + sautéed veggies",
+      "🍽️ Dinner: Lentil soup + roti + sautéed veggies"
     ],
     nonveg: [
       "🥣 Breakfast: Omelette (3 eggs) + toast + milk",
       "🥪 Snack: Tuna sandwich + orange",
       "🍛 Lunch: Chicken breast, rice, green beans",
       "🥛 Snack: Yogurt + boiled egg",
-      "🍽️ Dinner: Egg curry with roti and cucumbers",
-    ],
+      "🍽️ Dinner: Egg curry with roti and cucumbers"
+    ]
   },
   hard: {
     veg: [
@@ -126,22 +119,22 @@ const diets = {
       "🥪 Snack: Boiled soybeans + dry fruits",
       "🍛 Lunch: Chickpea salad + tofu + quinoa",
       "🥛 Snack: Paneer + fruit bowl",
-      "🍽️ Dinner: Dal + brown rice + spinach curry",
+      "🍽️ Dinner: Dal + brown rice + spinach curry"
     ],
     nonveg: [
       "🥣 Breakfast: Protein shake + 3 egg whites + toast",
       "🥪 Snack: Chicken tikka + boiled egg",
       "🍛 Lunch: Fish fillet + rice + vegetables",
       "🥛 Snack: Greek yogurt + almonds",
-      "🍽️ Dinner: Grilled chicken with mixed veggies + chapati",
-    ],
-  },
+      "🍽️ Dinner: Grilled chicken with mixed veggies + chapati"
+    ]
+  }
 };
 
 // Show workout by level
 function showWorkout(level) {
   const plan = workouts[level];
-  const listItems = plan.exercises.map((item) => `<li>${item}</li>`).join("");
+  const listItems = plan.exercises.map(item => `<li>${item}</li>`).join('');
   document.getElementById("workoutPlan").innerHTML = `
     <h2>${plan.title}</h2>
     <ul>${listItems}</ul>
@@ -160,19 +153,13 @@ function chooseDietLevel() {
 }
 
 // Show diet plan and toggle veg/nonveg
-function showDiet(level, type = "veg") {
-  const content = diets[level][type]
-    .map((item) => `<li>${item}</li>`)
-    .join("");
+function showDiet(level, type = 'veg') {
+  const content = diets[level][type].map(item => `<li>${item}</li>`).join('');
   document.getElementById("workoutPlan").innerHTML = `
     <h2>🍎 ${level.charAt(0).toUpperCase() + level.slice(1)} Diet Plan (100g Protein)</h2>
     <div class="diet-type">
-      <button onclick="toggleDiet('${level}', 'veg')" id="vegBtn" class="${
-    type === "veg" ? "active" : ""
-  }">🥦 Veg Plan</button>
-      <button onclick="toggleDiet('${level}', 'nonveg')" id="nonvegBtn" class="${
-    type === "nonveg" ? "active" : ""
-  }">🍗 Non-Veg Plan</button>
+      <button onclick="toggleDiet('${level}', 'veg')" id="vegBtn" class="${type === 'veg' ? 'active' : ''}">🥦 Veg Plan</button>
+      <button onclick="toggleDiet('${level}', 'nonveg')" id="nonvegBtn" class="${type === 'nonveg' ? 'active' : ''}">🍗 Non-Veg Plan</button>
     </div>
     <ul id="dietContent">${content}</ul>
   `;
@@ -191,8 +178,8 @@ const plans = {
       Tuesday: ["Plank (20s)", "Bodyweight Lunges", "Jumping Jacks"],
       Wednesday: ["Stretch or Rest"],
       Thursday: ["Bicycle Crunches", "Mountain Climbers"],
-      Friday: ["Burpees", "High Knees", "Stretch"],
-    },
+      Friday: ["Burpees", "High Knees", "Stretch"]
+    }
   },
   "gain_11-20_kids": {
     title: "🏋️ Kids Muscle Gain (11-20 lbs)",
@@ -201,8 +188,8 @@ const plans = {
       Tuesday: ["Chair Dips", "Sit-ups", "Wall Sit"],
       Wednesday: ["Stretch or Active Yoga"],
       Thursday: ["Plank (30s)", "Jumping Jacks", "Crunches"],
-      Friday: ["Mountain Climbers", "Squat Jumps", "Rest"],
-    },
+      Friday: ["Mountain Climbers", "Squat Jumps", "Rest"]
+    }
   },
   "gain_21+_kids": {
     title: "🏋️ Kids Muscle Gain (21+ lbs)",
@@ -211,8 +198,8 @@ const plans = {
       Tuesday: ["Sit-ups", "Wall Squats", "Jump Rope"],
       Wednesday: ["Yoga & Mobility"],
       Thursday: ["Jump Squats", "Chair Dips", "Core Circuit"],
-      Friday: ["Mountain Climbers", "Stretch"],
-    },
+      Friday: ["Mountain Climbers", "Stretch"]
+    }
   },
   "gain_0-10_adult": {
     title: "💪 Adult Muscle Gain (0-10 lbs)",
@@ -221,8 +208,8 @@ const plans = {
       Tuesday: ["Squats", "Leg Press", "Calf Raises"],
       Wednesday: ["Yoga or Rest"],
       Thursday: ["Deadlifts", "Barbell Rows", "Back Extensions"],
-      Friday: ["Overhead Press", "Dumbbell Raises", "Plank"],
-    },
+      Friday: ["Overhead Press", "Dumbbell Raises", "Plank"]
+    }
   },
   "gain_11-20_adult": {
     title: "💪 Adult Muscle Gain (11-20 lbs)",
@@ -231,8 +218,8 @@ const plans = {
       Tuesday: ["Heavy Squats", "Lunges", "Leg Curls"],
       Wednesday: ["Rest or Walk"],
       Thursday: ["Rows", "Deadlifts", "Hammer Curls"],
-      Friday: ["Shoulder Press", "Shrugs", "Lateral Raises"],
-    },
+      Friday: ["Shoulder Press", "Shrugs", "Lateral Raises"]
+    }
   },
   "gain_21+_adult": {
     title: "💪 Advanced Adult Muscle Gain (21+ lbs)",
@@ -241,8 +228,8 @@ const plans = {
       Tuesday: ["Deadlift (5x5)", "Leg Press", "Jump Squats"],
       Wednesday: ["Mobility and Core"],
       Thursday: ["Barbell Row", "T-bar Row", "Pull-ups"],
-      Friday: ["Overhead Press", "Front Raise", "Arnold Press"],
-    },
+      Friday: ["Overhead Press", "Front Raise", "Arnold Press"]
+    }
   },
   "lose_0-10_kids": {
     title: "🔥 Kids Fat Loss (0-10 lbs)",
@@ -251,8 +238,8 @@ const plans = {
       Tuesday: ["Jog in place", "Mountain Climbers", "Plank (20s)"],
       Wednesday: ["Stretch or Yoga"],
       Thursday: ["Sit-ups", "Jumping Jacks", "Wall Sit"],
-      Friday: ["Burpees", "High Knees"],
-    },
+      Friday: ["Burpees", "High Knees"]
+    }
   },
   "lose_11-20_kids": {
     title: "🔥 Kids Fat Loss (11-20 lbs)",
@@ -261,8 +248,8 @@ const plans = {
       Tuesday: ["Plank", "Sit-ups", "Jump Rope"],
       Wednesday: ["Active Yoga"],
       Thursday: ["Lunges", "Wall Sit", "Crunches"],
-      Friday: ["Mountain Climbers", "High Knees"],
-    },
+      Friday: ["Mountain Climbers", "High Knees"]
+    }
   },
   "lose_21+_kids": {
     title: "🔥 Advanced Kids Fat Loss (21+ lbs)",
@@ -271,8 +258,8 @@ const plans = {
       Tuesday: ["Push-ups", "Plank", "Squats"],
       Wednesday: ["Yoga & Core"],
       Thursday: ["Jump Lunges", "Wall Sits"],
-      Friday: ["Mountain Climbers", "Jump Squats"],
-    },
+      Friday: ["Mountain Climbers", "Jump Squats"]
+    }
   },
   "lose_0-10_adult": {
     title: "🔥 Adult Fat Loss (0-10 lbs)",
@@ -281,8 +268,8 @@ const plans = {
       Tuesday: ["Plank", "Mountain Climbers", "Jump Squats"],
       Wednesday: ["Walk or Light Jog"],
       Thursday: ["Sit-ups", "Box Jumps", "Treadmill"],
-      Friday: ["Air Bike", "Stretch"],
-    },
+      Friday: ["Air Bike", "Stretch"]
+    }
   },
   "lose_11-20_adult": {
     title: "🔥 Adult Fat Loss (11-20 lbs)",
@@ -291,8 +278,8 @@ const plans = {
       Tuesday: ["Box Jumps", "Core Circuit", "Push Press"],
       Wednesday: ["Mobility Day"],
       Thursday: ["Stair Runs", "Mountain Climbers"],
-      Friday: ["Treadmill (Incline)", "Dead Bug"],
-    },
+      Friday: ["Treadmill (Incline)", "Dead Bug"]
+    }
   },
   "lose_21+_adult": {
     title: "🔥 Advanced Adult Fat Loss (21+ lbs)",
@@ -301,12 +288,12 @@ const plans = {
       Tuesday: ["Boxing/Kickboxing", "Plank Jacks", "Air Bike"],
       Wednesday: ["Recovery Yoga"],
       Thursday: ["Battle Ropes", "Burpees", "Mountain Climbers"],
-      Friday: ["Treadmill Run", "Stretch"],
-    },
-  },
+      Friday: ["Treadmill Run", "Stretch"]
+    }
+  }
 };
 
-// Generate workout plan from user input
+// Generate plan based on inputs
 function generatePlan() {
   const currentWeight = parseInt(document.getElementById("currentWeight").value);
   const targetWeight = parseInt(document.getElementById("targetWeight").value);
@@ -331,94 +318,93 @@ function generatePlan() {
   }
 
   let content = `<h2>${plan.title}</h2>`;
-  for (const [day, exercises] of Object.entries(plan.days)) {
-    content += `<h3>${day}</h3><ul>${exercises.map((ex) => `<li>${ex}</li>`).join("")}</ul>`;
+  for (let [day, list] of Object.entries(plan.days)) {
+    content += `<h3>${day}</h3><ul>${list.map(item => `<li>${item}</li>`).join("")}</ul>`;
   }
 
   document.getElementById("workoutPlan").innerHTML = content;
 }
+// JavaScript for Workout Planner Enhancements
 
-// Dark mode toggle via checkbox input
-document.getElementById("darkModeToggle").addEventListener("change", (e) => {
-  if (e.target.checked) {
-    document.body.classList.add("dark-mode");
-  } else {
-    document.body.classList.remove("dark-mode");
-  }
+// Dark mode toggle
+const toggleBtn = document.createElement('button');
+toggleBtn.innerText = 'Toggle Dark Mode';
+toggleBtn.className = 'toggle-dark-mode';
+document.body.appendChild(toggleBtn);
+toggleBtn.addEventListener('click', () => {
+  document.body.classList.toggle('dark-mode');
 });
 
-// Points system for gamification
+// Gamification - points system
 let points = 0;
 function addPoints(p) {
   points += p;
-  document.getElementById("pointDisplay").innerText = `Points: ${points}`;
+  document.getElementById('pointDisplay').innerText = `Points: ${points}`;
 }
 
-// Calculate BMI (pounds & inches)
 function calculateBMI() {
-  const weight = parseFloat(document.getElementById("weight").value);
-  const height = parseFloat(document.getElementById("height").value);
-  if (!weight || !height) {
-    alert("Please enter both height (inches) and weight (lbs).");
-    return;
-  }
-  const bmi = ((weight / (height * height)) * 703).toFixed(2);
-  document.getElementById("bmiResult").innerText = `Your BMI: ${bmi}`;
+  const weight = parseFloat(document.getElementById('weightInput').value);
+  const height = parseFloat(document.getElementById('heightInput').value);
+  if (!weight || !height) return;
+  const bmi = (weight / ((height / 100) ** 2)).toFixed(2);
+  document.getElementById('bmiResult').innerText = `Your BMI: ${bmi}`;
 }
 
-// Water tracker display update
+// Water tracker
 function updateWaterLevel(val) {
-  document.getElementById("waterValue").innerText = `${val} cups`;
+  document.getElementById('waterValue').innerText = `${val} cups`;
 }
 
 // Sleep tracker emoji feedback
 function updateSleepEmoji(val) {
-  let emoji = "😴";
-  if (val >= 8) emoji = "😊";
-  else if (val >= 6) emoji = "😌";
-  else emoji = "😟";
-  document.getElementById("sleepEmoji").innerText = emoji;
+  let emoji = '😴';
+  if (val >= 8) emoji = '😊';
+  else if (val >= 6) emoji = '😌';
+  else emoji = '😟';
+  document.getElementById('sleepEmoji').innerText = emoji;
 }
 
-// Meal tracker emoji feedback
+// Meal emoji
 function updateMealEmoji(val) {
-  let emoji = "🍽️";
-  if (val >= 3) emoji = "🟢";
-  else if (val === 2) emoji = "🟡";
-  else emoji = "🔴";
-  document.getElementById("mealEmoji").innerText = emoji;
+  let emoji = '🍽️';
+  if (val >= 3) emoji = '🟢';
+  else if (val === 2) emoji = '🟡';
+  else emoji = '🔴';
+  document.getElementById('mealEmoji').innerText = emoji;
 }
 
-// Save daily note
-function saveNote() {
-  const note = document.getElementById("dailyNote").value;
-  localStorage.setItem("dailyNote", note);
-  alert("Note Saved!");
-}
-
-// Load saved note on page load
-window.addEventListener("DOMContentLoaded", () => {
-  const savedNote = localStorage.getItem("dailyNote");
-  if (savedNote) document.getElementById("dailyNote").value = savedNote;
-
-  document.getElementById("pointDisplay").innerText = `Points: ${points}`;
-  updateWaterLevel(0);
-  updateSleepEmoji(0);
-  updateMealEmoji(0);
-  updateStreak(true);
+// Notes saving (localStorage optional)
+document.getElementById('saveNote').addEventListener('click', () => {
+  const note = document.getElementById('dailyNote').value;
+  localStorage.setItem('dailyNote', note);
+  alert('Note Saved!');
 });
 
-// Buddy message sending (demo alert)
+// Load saved note
+window.addEventListener('DOMContentLoaded', () => {
+  const savedNote = localStorage.getItem('dailyNote');
+  if (savedNote) document.getElementById('dailyNote').value = savedNote;
+});
+
+// Buddy message
 function sendBuddyMessage() {
-  const msg = document.getElementById("buddyMessage").value;
-  if (!msg) return alert("Enter a message first.");
+  const msg = document.getElementById('buddyMessage').value;
   alert(`Sent to buddy: ${msg}`);
 }
 
-// Streak counter
+// Sample streak counter
 let streak = 0;
 function updateStreak(success) {
   if (success) streak++;
   else streak = 0;
-  document.getElementById("streakCounter").innerText = `🔥 Streak: ${streak}`;
+  document.getElementById('streakCounter').innerText = `🔥 Streak: ${streak}`;
 }
+
+// On load defaults
+window.onload = () => {
+  document.getElementById('pointDisplay').innerText = `Points: ${points}`;
+  updateWaterLevel(0);
+  updateSleepEmoji(0);
+  updateMealEmoji(0);
+  updateStreak(true);
+};
